@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>灵龟八法 · 子午流注</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ink-black: #1a1a1a;
+            --paper-white: #f7f5f0;
+            --cinnabar: #c93756;
+            --jade: #5b8c5a;
+            --gold: #b8956a;
+        }
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: var(--paper-white);
+            color: var(--ink-black);
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%239C92AC' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+        .serif { font-family: 'Noto Serif SC', serif; }
+        .vertical-text { writing-mode: vertical-rl; text-orientation: upright; }
+        .ink-border { border: 1px solid rgba(0,0,0,0.1); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03); }
+        .active-meridian { background: linear-gradient(135deg, #c93756 0%, #a02a42 100%); color: white; transform: scale(1.05); box-shadow: 0 10px 15px -3px rgba(201, 55, 86, 0.3); }
+        .meridian-card { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .meridian-card:hover { transform: translateY(-2px); box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1); }
+        .pulse-animation { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .7; } }
+        .clock-hand { transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        .fade-in { animation: fadeIn 0.6s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .game-dot { transition: all 0.3s ease; cursor: pointer; }
+        .game-dot:hover { r: 8; fill: #c93756; }
+        .game-dot.active { fill: #c93756; filter: drop-shadow(0 0 8px rgba(201, 55, 86, 0.6)); }
+        .tab-active { border-bottom: 2px solid #c93756; color: #c93756; }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #c93756; border-radius: 3px; }
+        input[type=range] { -webkit-appearance: none; width: 100%; background: transparent; }
+        input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 20px; width: 20px; border-radius: 50%; background: #c93756; cursor: pointer; margin-top: -8px; box-shadow: 0 2px 6px rgba(201, 55, 86, 0.4); }
+        input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 4px; cursor: pointer; background: #e5e5e5; border-radius: 2px; }
+        input[type=range]:focus { outline: none; }
+        .shichen-btn { transition: all 0.3s ease; }
+        .shichen-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .shichen-btn.active { background: #c93756; color: white; border-color: #c93756; }
+        .mode-indicator { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 500; }
+        .mode-realtime { background: #dcfce7; color: #166534; }
+        .mode-manual { background: #fee2e2; color: #991b1b; }
+        .point-card { transition: all 0.3s ease; }
+        .point-card:hover { transform: translateX(4px); border-left-color: #c93756; }
+        .calculation-box { background: linear-gradient(135deg, #f5f5f4 0%, #e7e5e4 100%); border: 1px solid #d6d3d1; }
+        .gender-btn { transition: all 0.2s ease; }
+        .gender-btn.active { background: #c93756; color: white; border-color: #c93756; }
+    </style>
+</head>
+<body class="min-h-screen">
+
+    <!-- 页眉 -->
+    <header class="bg-white/80 backdrop-blur-md border-b border-stone-200 sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-stone-800 rounded-full flex items-center justify-center text-white overflow-hidden relative">
+                    <svg viewBox="0 0 100 100" class="w-8 h-8">
+                        <circle cx="50" cy="50" r="48" fill="white" stroke="#1a1a1a" stroke-width="2"/>
+                        <path d="M50 2 A48 48 0 0 1 50 98 A24 24 0 0 1 50 50 A24 24 0 0 0 50 2" fill="#1a1a1a"/>
+                        <circle cx="50" cy="26" r="8" fill="#1a1a1a"/>
+                        <circle cx="50" cy="74" r="8" fill="white"/>
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="text-2xl font-bold serif tracking-widest text-stone-800">灵龟八法</h1>
+                    <p class="text-xs text-stone-500 tracking-wider">灵龟八法 · 子午流注 纳甲纳子法</p>
+                </div>
+            </div>
+            <div class="text-right">
+                <div id="currentTime" class="text-lg font-mono font-semibold text-stone-700"></div>
+                <div id="currentDate" class="text-xs text-stone-500"></div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-8 space-y-8">
+
+        <!-- 主区域：时钟 + 快速统计 -->
+        <section class="grid md:grid-cols-2 gap-6">
+            <!-- 左侧：时钟及当前时辰 -->
+            <div class="bg-white ink-border rounded-2xl p-8 relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-stone-100 rounded-full -mr-16 -mt-16 opacity-50"></div>
+                
+                <!-- 模式切换 -->
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-lg font-semibold serif text-stone-700 flex items-center gap-2">
+                        <span class="w-2 h-2 bg-red-500 rounded-full pulse-animation" id="pulseIndicator"></span>
+                        <span id="sectionTitle">当前时辰经络</span>
+                    </h2>
+                    <div class="flex items-center gap-2">
+                        <span id="modeBadge" class="mode-indicator mode-realtime">
+                            <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
+                            实时模式
+                        </span>
+                        <button onclick="toggleMode()" class="text-xs px-3 py-1 bg-stone-100 hover:bg-stone-200 rounded-full transition-colors">
+                            切换模式
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- 手动时辰控件 -->
+                <div id="timeControls" class="mb-6 p-4 bg-stone-50 rounded-xl border border-stone-200 hidden">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-sm font-medium text-stone-700">选择时辰</span>
+                        <button onclick="resetToCurrentTime()" class="text-xs text-red-600 hover:text-red-700 font-medium">
+                            恢复当前时间
+                        </button>
+                    </div>
+                    <div class="mb-4">
+                        <input type="range" id="timeSlider" min="0" max="23" value="12" step="1" 
+                               oninput="handleTimeSlider(this.value)" class="w-full">
+                        <div class="flex justify-between text-xs text-stone-400 mt-1">
+                            <span>子时</span>
+                            <span>午时</span>
+                            <span>亥时</span>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-6 gap-2">
+                        <button onclick="selectShichen(0)" class="shichen-btn text-xs py-2 px-1 border border-stone-200 rounded bg-white text-stone-600" data-hour="0">子</button>
+                        <button onclick="selectShichen(2)" class="shichen-btn text-xs py-2 px-1 border border-stone-200 rounded bg-white text-stone-600" data-hour="2">丑</button>
+                        <button onclick="selectShichen(4)" class="shichen-btn text-xs py-2 px-1 border border-stone-200 rounded bg-white text-stone-600" data-hour="4">寅</button>
+                        <button onclick="selectShichen(6)" class="shichen-btn text-xs py-2 px-1 border border-stone-200 rounded bg-white text-stone-600" data-hour="6">卯</button>
+                        <button onclick="selectShichen(8)" class="shichen-btn text-xs py-2 px-1 border border-stone-200 rounded bg-white text-stone-600" data-hour="8">辰</button>
+                        <button onclick="selectShichen(10)" class="shichen-btn text-xs py-2 px-1 border border-stone-200 rounded bg-white text-stone-600" data-hour="10">巳</button>
+                        <button onclick="selectShichen(12)" class="shichen-btn text-xs py-2 px-1 border border-stone-200 rounded bg-white text-stone-600" data-hour="12">午</button>
+                        <button onclick="selectShichen(14)" class="shichen-btn text-xs py-2 px-1 border border-stone-200 rounded bg-white text-stone-600" data-hour="14">未</button>
+                        <button onclick="selectShichen(16)" class="shichen-btn text-xs py-2 px-1 border border-stone-200 rounded bg-white text-stone-600" data-hour="16">申</button>
+                        <button onclick="selectShichen(18)" class="shichen-btn text-xs py-2 px-1 border border-stone-200 rounded bg-white text-stone-600" data-hour="18">酉</button>
+                        <button onclick="selectShichen(20)" class="shichen-btn text-xs py-2 px-1 border border-stone-200 rounded bg-white text-stone-600" data-hour="20">戌</button>
+                        <button onclick="selectShichen(22)" class="shichen-btn text-xs py-2 px-1 border border-stone-200 rounded bg-white text-stone-600" data-hour="22">亥</button>
+                    </div>
+                </div>
+                
+                <!-- 时钟盘 -->
+                <div class="flex items-center justify-center mb-6">
+                    <div class="relative w-48 h-48">
+                        <svg class="w-full h-full" viewBox="0 0 100 100">
+                            <circle cx="50" cy="50" r="45" fill="none" stroke="#e5e5e5" stroke-width="2"/>
+                            <g id="hourMarkers"></g>
+                            <line id="hourHand" x1="50" y1="50" x2="50" y2="20" stroke="#c93756" stroke-width="3" stroke-linecap="round" class="clock-hand" transform="rotate(0,50,50)"/>
+                            <circle cx="50" cy="50" r="3" fill="#c93756"/>
+                        </svg>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="text-center">
+                                <div id="currentShichen" class="text-3xl font-bold serif text-stone-800"></div>
+                                <div id="currentTimeRange" class="text-xs text-stone-500 mt-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 当前经络详情 -->
+                <div id="currentMeridianDisplay" class="bg-stone-50 rounded-xl p-4 border border-stone-200"></div>
+            </div>
+
+            <!-- 右侧：统计卡片（含性别切换） -->
+            <div class="space-y-4">
+                <!-- 灵龟八法卡片 -->
+                <div class="bg-gradient-to-br from-stone-800 to-stone-900 text-white rounded-2xl p-6 ink-border">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="text-sm font-semibold text-stone-300 uppercase tracking-wider flex items-center gap-2">
+                            <span>灵龟八法</span>
+                            <span class="text-xs normal-case text-stone-400">日时干支计算</span>
+                        </h3>
+                        <!-- 性别切换按钮 -->
+                        <div class="flex bg-stone-700 rounded-lg p-0.5">
+                            <button onclick="setGender('male')" id="genderMale" class="gender-btn px-3 py-1 text-xs rounded-md transition-colors active">男</button>
+                            <button onclick="setGender('female')" id="genderFemale" class="gender-btn px-3 py-1 text-xs rounded-md transition-colors">女</button>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4 flex gap-2">
+                        <input type="date" id="datePicker" onchange="updateGanZhi()" 
+                               class="bg-stone-700 text-white text-sm rounded px-3 py-2 border border-stone-600 focus:outline-none focus:border-amber-400">
+                        <button onclick="setToday()" class="text-xs px-3 py-2 bg-stone-700 hover:bg-stone-600 rounded border border-stone-600 transition-colors">
+                            今日
+                        </button>
+                    </div>
+
+                    <div id="lingguiCalc" class="space-y-2 text-sm"></div>
+
+                    <div class="mt-4 pt-4 border-t border-stone-700">
+                        <div class="flex items-center justify-between">
+                            <span class="text-stone-400 text-xs">开穴</span>
+                            <span id="lingguiPoint" class="text-2xl font-bold text-amber-400 serif"></span>
+                        </div>
+                        <div id="lingguiPair" class="text-xs text-stone-400 mt-1 text-right"></div>
+                    </div>
+                </div>
+
+                <!-- 纳甲法卡片 -->
+                <div class="bg-white ink-border rounded-2xl p-6">
+                    <h3 class="text-sm font-semibold text-stone-500 mb-3 uppercase tracking-wider">子午流注 · 纳甲法（阎氏）</h3>
+                    <div id="najiaResult" class="space-y-3"></div>
+                </div>
+
+                <!-- 纳子法卡片 -->
+                <div class="bg-white ink-border rounded-2xl p-6">
+                    <h3 class="text-sm font-semibold text-stone-500 mb-3 uppercase tracking-wider">子午流注 · 纳子法</h3>
+                    <div id="naziResult" class="space-y-2 text-sm"></div>
+                </div>
+
+                <!-- 宜忌卡片 -->
+                <div class="bg-white ink-border rounded-2xl p-6">
+                    <h3 class="text-sm font-semibold text-stone-500 mb-4 uppercase tracking-wider">时辰宜忌</h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+                            <div class="text-green-700 font-semibold mb-2 flex items-center gap-2">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                宜
+                            </div>
+                            <ul id="yiList" class="text-sm text-green-800 space-y-1"></ul>
+                        </div>
+                        <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+                            <div class="text-red-700 font-semibold mb-2 flex items-center gap-2">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                忌
+                            </div>
+                            <ul id="jiList" class="text-sm text-red-800 space-y-1"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 导航标签 -->
+        <div class="border-b border-stone-200">
+            <nav class="flex gap-8">
+                <button onclick="switchTab('meridians')" id="tab-meridians" class="tab-active pb-4 text-sm font-medium transition-colors hover:text-red-600">十二经络</button>
+                <button onclick="switchTab('points')" id="tab-points" class="pb-4 text-sm font-medium text-stone-500 transition-colors hover:text-red-600">穴位详解</button>
+                <button onclick="switchTab('knowledge')" id="tab-knowledge" class="pb-4 text-sm font-medium text-stone-500 transition-colors hover:text-red-600">针灸常识</button>
+                <button onclick="switchTab('game')" id="tab-game" class="pb-4 text-sm font-medium text-stone-500 transition-colors hover:text-red-600 flex items-center gap-1">
+                    <span>经络游戏</span>
+                    <span class="bg-red-100 text-red-600 text-xs px-2 py-0.5 rounded-full">互动</span>
+                </button>
+            </nav>
+        </div>
+
+        <!-- 十二经络网格 -->
+        <section id="section-meridians" class="fade-in">
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4" id="meridianGrid"></div>
+            <div class="mt-8 bg-white ink-border rounded-2xl p-6" id="meridianDetail">
+                <div class="text-center text-stone-400 py-12">
+                    <p>点击上方经络卡片查看详细信息</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 穴位详解 -->
+        <section id="section-points" class="hidden fade-in">
+            <div class="bg-white ink-border rounded-2xl p-6">
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="w-full md:w-1/3">
+                        <h3 class="font-semibold mb-4 serif">八脉交会穴</h3>
+                        <div class="space-y-2" id="pointsList"></div>
+                    </div>
+                    <div class="w-full md:w-2/3 bg-stone-50 rounded-xl p-6" id="pointDetail">
+                        <div class="text-center text-stone-400 py-12">
+                            <p>选择左侧穴位查看详情</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 针灸常识 -->
+        <section id="section-knowledge" class="hidden fade-in">
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white ink-border rounded-2xl p-6">
+                    <h3 class="text-lg font-bold serif mb-4 flex items-center gap-2">
+                        <span class="w-8 h-8 bg-stone-100 rounded-full flex items-center justify-center text-stone-600 text-sm">1</span>
+                        灵龟八法计算原理
+                    </h3>
+                    <div class="space-y-3 text-sm text-stone-600">
+                        <p><strong>计算公式：</strong>（日干+日支+时干+时支）÷9（阳日）或÷6（阴日）= 商……余数</p>
+                        <div class="bg-stone-50 p-3 rounded-lg border border-stone-200">
+                            <p class="font-semibold mb-2">八法逐日干支基数歌：</p>
+                            <p class="text-xs leading-relaxed font-mono">
+                                甲己辰戌丑未十，乙庚申酉九为期，<br>
+                                丁壬寅卯八成数，戊癸巳午七相宜，<br>
+                                丙辛亥子亦七数，逐日干支即得知。
+                            </p>
+                        </div>
+                        <div class="bg-stone-50 p-3 rounded-lg border border-stone-200">
+                            <p class="font-semibold mb-2">八法临时干支基数歌：</p>
+                            <p class="text-xs leading-relaxed font-mono">
+                                甲己子午九宜用，乙庚丑未八无疑，<br>
+                                丙辛寅申七作数，丁壬卯酉六须知，<br>
+                                戊癸辰戌各有五，巳亥单加四共齐。
+                            </p>
+                        </div>
+                        <div class="bg-amber-50 p-3 rounded-lg border border-amber-200">
+                            <p class="font-semibold mb-2 text-amber-800">八法歌（九宫配穴）：</p>
+                            <p class="text-xs leading-relaxed text-amber-900 font-mono">
+                                坎一联申脉，照海坤二五，<br>
+                                震三属外关，巽四临泣数，<br>
+                                乾六是公孙，兑七后溪府，<br>
+                                艮八属内关，离九列缺主。
+                            </p>
+                            <p class="text-xs mt-2">注：余数5男寄坤（照海）、女寄艮（内关）</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white ink-border rounded-2xl p-6">
+                    <h3 class="text-lg font-bold serif mb-4 flex items-center gap-2">
+                        <span class="w-8 h-8 bg-stone-100 rounded-full flex items-center justify-center text-stone-600 text-sm">2</span>
+                        子午流注纳甲法（阎氏）
+                    </h3>
+                    <div class="space-y-3 text-sm text-stone-600">
+                        <p>阎氏纳甲法出自《子午流注针经》，十二经脉都参与流注，三焦经和心包经亦参与开穴 。</p>
+                        <div class="bg-stone-50 p-3 rounded-lg border border-stone-200">
+                            <p class="font-semibold mb-2">核心规律：</p>
+                            <ul class="space-y-1 text-xs">
+                                <li>• 阳进阴退开井穴</li>
+                                <li>• 阳日阳时开阳经，阴日阴时开阴经</li>
+                                <li>• 返本还原：开输穴时同开值日经原穴</li>
+                                <li>• 气纳三焦（阳日重见）、血归包络（阴日重见）</li>
+                            </ul>
+                        </div>
+                        <div class="bg-stone-50 p-3 rounded-lg border border-stone-200">
+                            <p class="font-semibold mb-2">癸日特殊：</p>
+                            <p class="text-xs">三焦经、心包经、肾经同一天值日，壬子时开三焦井关冲，癸丑时开心包井中冲，癸亥时开肾井涌泉 。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white ink-border rounded-2xl p-6">
+                    <h3 class="text-lg font-bold serif mb-4 flex items-center gap-2">
+                        <span class="w-8 h-8 bg-stone-100 rounded-full flex items-center justify-center text-stone-600 text-sm">3</span>
+                        子午流注纳子法
+                    </h3>
+                    <div class="space-y-3 text-sm text-stone-600">
+                        <p>纳子法以十二地支为基础，按十二时辰气血流注顺序，补母泻子取穴 。</p>
+                        <div class="bg-stone-50 p-3 rounded-lg border border-stone-200">
+                            <p class="font-semibold mb-2">补母泻子原则：</p>
+                            <ul class="space-y-1 text-xs">
+                                <li>• 实证：泻其子穴（我生者为子）</li>
+                                <li>• 虚证：补其母穴（生我者为母）</li>
+                                <li>• 本经自病：取本穴（与本经五行相同）</li>
+                            </ul>
+                        </div>
+                        <div class="bg-green-50 p-3 rounded-lg border border-green-200">
+                            <p class="font-semibold mb-2 text-green-800">示例：</p>
+                            <p class="text-xs text-green-900">肺经（金）实证：泻子穴尺泽（水）；虚证：补母穴太渊（土）</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white ink-border rounded-2xl p-6">
+                    <h3 class="text-lg font-bold serif mb-4">针灸小常识</h3>
+                    <div class="space-y-4">
+                        <details class="group">
+                            <summary class="flex justify-between items-center font-medium cursor-pointer list-none text-sm">
+                                <span>针刺深度如何掌握？</span>
+                                <span class="transition group-open:rotate-180">
+                                    <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
+                                </span>
+                            </summary>
+                            <p class="text-stone-600 text-sm mt-3 leading-relaxed">
+                                根据《黄帝内经》："刺骨者无伤筋，刺筋者无伤肉"。一般头面部浅刺0.3-0.5寸，四肢部可刺1-1.5寸，腰臀部可深刺2-3寸。需根据患者胖瘦、年龄、病情灵活掌握。
+                            </p>
+                        </details>
+                        <div class="border-t border-stone-100"></div>
+                        <details class="group">
+                            <summary class="flex justify-between items-center font-medium cursor-pointer list-none text-sm">
+                                <span>得气是什么感觉？</span>
+                                <span class="transition group-open:rotate-180">
+                                    <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
+                                </span>
+                            </summary>
+                            <p class="text-stone-600 text-sm mt-3 leading-relaxed">
+                                得气是针刺取得疗效的关键。患者会感到酸、麻、胀、重，或像触电般的感觉；医生手下会有沉、紧、涩的感觉，如"鱼吞钩饵之浮沉"。
+                            </p>
+                        </details>
+                        <div class="border-t border-stone-100"></div>
+                        <details class="group">
+                            <summary class="flex justify-between items-center font-medium cursor-pointer list-none text-sm">
+                                <span>哪些情况不宜针刺？</span>
+                                <span class="transition group-open:rotate-180">
+                                    <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
+                                </span>
+                            </summary>
+                            <p class="text-stone-600 text-sm mt-3 leading-relaxed">
+                                过饥、过饱、醉酒、大怒、大惊、劳累过度时不宜针刺；孕妇腰骶部、腹部禁针；小儿囟门未闭时头顶部禁针；皮肤感染、溃疡、瘢痕处不宜针刺。
+                            </p>
+                        </details>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 经络游戏 -->
+        <section id="section-game" class="hidden fade-in">
+            <div class="bg-white ink-border rounded-2xl p-8">
+                <div class="text-center mb-8">
+                    <h3 class="text-2xl font-bold serif mb-2">经络连线挑战</h3>
+                    <p class="text-stone-500 text-sm">按照子午流注顺序连接十二经络</p>
+                </div>
+
+                <div class="max-w-2xl mx-auto">
+                    <div class="flex justify-between items-center mb-4">
+                        <div class="text-sm text-stone-600">
+                            得分: <span id="gameScore" class="font-bold text-red-600 text-lg">0</span>
+                        </div>
+                        <button onclick="resetGame()" class="px-4 py-2 bg-stone-100 hover:bg-stone-200 rounded-lg text-sm transition-colors">
+                            重新开始
+                        </button>
+                    </div>
+
+                    <div class="relative bg-stone-50 rounded-xl border-2 border-stone-200 aspect-square max-w-lg mx-auto" id="gameBoard">
+                        <svg class="w-full h-full" id="gameSvg" viewBox="0 0 400 400">
+                            <g id="connections" stroke="#e5e5e5" stroke-width="2" fill="none"></g>
+                            <g id="activeConnections" stroke="#c93756" stroke-width="3" fill="none"></g>
+                            <g id="gameDots"></g>
+                        </svg>
+                        
+                        <div id="gameOverlay" class="absolute inset-0 bg-white/90 flex items-center justify-center rounded-xl">
+                            <button onclick="startGame()" class="px-8 py-4 bg-stone-800 text-white rounded-xl font-semibold hover:bg-stone-700 transition-all transform hover:scale-105 shadow-lg">
+                                开始挑战
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 text-center">
+                        <div id="gameMessage" class="text-sm text-stone-600 h-6"></div>
+                        <div class="flex justify-center gap-2 mt-4 flex-wrap" id="sequenceDisplay"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-stone-900 text-stone-400 py-8 mt-12">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <p class="serif text-lg mb-2 text-stone-300">灵龟八法 · 顺应天时</p>
+            <p class="text-xs">仁安医馆 依据《子午流注针经》编制 · 仅供参考学习</p>
+        </div>
+    </footer>
+
+    <script>
+        // ==================== 数据定义 ====================
+        const meridians = [
+            { id: 'lung', name: '手太阴肺经', time: '03:00-05:00', shichen: '寅时', element: '金', yinYang: '阴', 
+              points: '中府、云门、天府、侠白、尺泽、孔最、列缺、经渠、太渊、鱼际、少商',
+              effect: '主治咳嗽、气喘、胸痛、咽喉肿痛等呼吸系统疾病',
+              description: '肺经当令，肺朝百脉，此时深度睡眠有助于气血分配',
+              mother: '太渊', son: '尺泽', ben: '经渠' },
+            { id: 'largeIntestine', name: '手阳明大肠经', time: '05:00-07:00', shichen: '卯时', element: '金', yinYang: '阳',
+              points: '商阳、二间、三间、合谷、阳溪、偏历、温溜、下廉、上廉、手三里、曲池',
+              effect: '主治头痛、牙痛、咽喉肿痛、腹痛、便秘',
+              description: '大肠经当令，宜起床排便，喝温水促进肠胃蠕动',
+              mother: '曲池', son: '二间', ben: '商阳' },
+            { id: 'stomach', name: '足阳明胃经', time: '07:00-09:00', shichen: '辰时', element: '土', yinYang: '阳',
+              points: '承泣、四白、巨髎、地仓、大迎、颊车、下关、头维、人迎、水突',
+              effect: '主治胃痛、呕吐、腹胀、消化不良、面部神经麻痹',
+              description: '胃经当令，早餐最易消化，此时进食不易发胖',
+              mother: '解溪', son: '厉兑', ben: '足三里' },
+            { id: 'spleen', name: '足太阴脾经', time: '09:00-11:00', shichen: '巳时', element: '土', yinYang: '阴',
+              points: '隐白、大都、太白、公孙、商丘、三阴交、漏谷、地机、阴陵泉、血海',
+              effect: '主治腹胀、腹泻、消化不良、月经不调、崩漏',
+              description: '脾经当令，脾主运化，此时适合工作学习，效率最高',
+              mother: '大都', son: '商丘', ben: '太白' },
+            { id: 'heart', name: '手少阴心经', time: '11:00-13:00', shichen: '午时', element: '火', yinYang: '阴',
+              points: '极泉、青灵、少海、灵道、通里、阴郄、神门、少府、少冲',
+              effect: '主治心痛、心悸、失眠、健忘、癫狂',
+              description: '心经当令，阳极阴生，宜小憩片刻，不宜剧烈运动',
+              mother: '少冲', son: '神门', ben: '少府' },
+            { id: 'smallIntestine', name: '手太阳小肠经', time: '13:00-15:00', shichen: '未时', element: '火', yinYang: '阳',
+              points: '少泽、前谷、后溪、腕骨、阳谷、养老、支正、小海',
+              effect: '主治头痛、目赤、耳聋、颊肿、肩臂疼痛',
+              description: '小肠经当令，分清别浊，此时多喝水有利于排毒',
+              mother: '后溪', son: '小海', ben: '阳谷' },
+            { id: 'bladder', name: '足太阳膀胱经', time: '15:00-17:00', shichen: '申时', element: '水', yinYang: '阳',
+              points: '睛明、攒竹、眉冲、曲差、五处、承光、通天、络却、玉枕、天柱',
+              effect: '主治头痛、目疾、鼻衄、项强、腰背痛',
+              description: '膀胱经当令，此时多喝水，运动排毒效果最佳',
+              mother: '至阴', son: '束骨', ben: '足通谷' },
+            { id: 'kidney', name: '足少阴肾经', time: '17:00-19:00', shichen: '酉时', element: '水', yinYang: '阴',
+              points: '涌泉、然谷、太溪、大钟、水泉、照海、复溜、交信、筑宾、阴谷',
+              effect: '主治遗精、阳痿、月经不调、咳血、腰痛',
+              description: '肾经当令，肾主藏精，此时宜静养，准备晚餐',
+              mother: '复溜', son: '涌泉', ben: '阴谷' },
+            { id: 'pericardium', name: '手厥阴心包经', time: '19:00-21:00', shichen: '戌时', element: '火', yinYang: '阴',
+              points: '天池、天泉、曲泽、郄门、间使、内关、大陵、劳宫、中冲',
+              effect: '主治心痛、心悸、胃痛、呕吐、癫狂',
+              description: '心包经当令，心为君主之官，心包代心受邪，此时宜放松',
+              mother: '中冲', son: '大陵', ben: '劳宫' },
+            { id: 'tripleBurner', name: '手少阳三焦经', time: '21:00-23:00', shichen: '亥时', element: '火', yinYang: '阳',
+              points: '关冲、液门、中渚、阳池、外关、支沟、会宗、三阳络、四渎、天井',
+              effect: '主治偏头痛、耳鸣、耳聋、目赤、咽喉肿痛',
+              description: '三焦经当令，三焦通百脉，此时准备入睡，百脉休养生息',
+              mother: '中渚', son: '天井', ben: '支沟' },
+            { id: 'gallbladder', name: '足少阳胆经', time: '23:00-01:00', shichen: '子时', element: '木', yinYang: '阳',
+              points: '瞳子髎、听会、上关、颔厌、悬颅、悬厘、曲鬓、率谷、天冲、浮白',
+              effect: '主治偏头痛、目疾、耳鸣、胁痛、黄疸',
+              description: '胆经当令，子时一阳生，此时必须熟睡养胆气',
+              mother: '侠溪', son: '阳辅', ben: '足临泣' },
+            { id: 'liver', name: '足厥阴肝经', time: '01:00-03:00', shichen: '丑时', element: '木', yinYang: '阴',
+              points: '大敦、行间、太冲、中封、蠡沟、中都、膝关、曲泉、阴包、足五里',
+              effect: '主治头痛、眩晕、目赤、胁痛、月经不调',
+              description: '肝经当令，肝主藏血，此时熟睡养肝血，推陈出新',
+              mother: '曲泉', son: '行间', ben: '大敦' }
+        ];
+
+        const baFaPoints = [
+            { num: 1, name: '申脉', meridian: '足太阳膀胱经', position: '足外侧部，外踝直下方凹陷中', effect: '主治头痛、眩晕、失眠、癫狂痫，通阳跷脉', trigram: '坎', pair: '后溪' },
+            { num: 2, name: '照海', meridian: '足少阴肾经', position: '足内侧，内踝尖下方凹陷处', effect: '主治咽干、失眠、月经不调、便秘，通阴跷脉', trigram: '坤', pair: '列缺' },
+            { num: 3, name: '外关', meridian: '手少阳三焦经', position: '前臂背侧，腕背横纹上2寸', effect: '主治热病、头痛、耳鸣，通阳维脉', trigram: '震', pair: '足临泣' },
+            { num: 4, name: '足临泣', meridian: '足少阳胆经', position: '足背外侧，第4跖趾关节后方', effect: '主治偏头痛、目赤、胁痛，通带脉', trigram: '巽', pair: '外关' },
+            { num: 6, name: '公孙', meridian: '足太阴脾经', position: '足内侧缘，第1跖骨基底前下方', effect: '主治胃痛、呕吐、腹痛、腹泻，通冲脉', trigram: '乾', pair: '内关' },
+            { num: 7, name: '后溪', meridian: '手太阳小肠经', position: '手掌尺侧，微握拳第5掌指关节后', effect: '主治头项强痛、腰背痛、癫狂，通督脉', trigram: '兑', pair: '申脉' },
+            { num: 8, name: '内关', meridian: '手厥阴心包经', position: '前臂掌侧，腕横纹上2寸', effect: '主治心痛、心悸、胸闷、失眠，通阴维脉', trigram: '艮', pair: '公孙' },
+            { num: 9, name: '列缺', meridian: '手太阴肺经', position: '前臂桡侧缘，腕横纹上1.5寸', effect: '主治咳嗽、气喘、头痛、牙痛，通任脉', trigram: '离', pair: '照海' }
+        ];
+
+        const dayGanZhiNum = {
+            '甲':10,'己':10,'辰':10,'戌':10,'丑':10,'未':10,
+            '乙':9,'庚':9,'申':9,'酉':9,
+            '丁':8,'壬':8,'寅':8,'卯':8,
+            '戊':7,'癸':7,'丙':7,'辛':7,'巳':7,'午':7,'亥':7,'子':7
+        };
+        const hourGanZhiNum = {
+            '甲':9,'己':9,'子':9,'午':9,
+            '乙':8,'庚':8,'丑':8,'未':8,
+            '丙':7,'辛':7,'寅':7,'申':7,
+            '丁':6,'壬':6,'卯':6,'酉':6,
+            '戊':5,'癸':5,'辰':5,'戌':5,
+            '巳':4,'亥':4
+        };
+        const ganYinYang = { '甲':'阳','乙':'阴','丙':'阳','丁':'阴','戊':'阳','己':'阴','庚':'阳','辛':'阴','壬':'阳','癸':'阴' };
+
+        const najiaTable = {
+            '甲': {
+                '戌': { meridian: '胆', point: '窍阴', type: '井', extra: '' },
+                '子': { meridian: '小肠', point: '前谷', type: '荥', extra: '' },
+                '寅': { meridian: '胃', point: '陷谷', type: '输', extra: '返本还原丘墟' },
+                '辰': { meridian: '大肠', point: '阳溪', type: '经', extra: '' },
+                '午': { meridian: '膀胱', point: '委中', type: '合', extra: '' },
+                '申': { meridian: '三焦', point: '液门', type: '荥', extra: '气纳三焦（水生木）' }
+            },
+            '乙': {
+                '酉': { meridian: '肝', point: '大敦', type: '井', extra: '' },
+                '亥': { meridian: '心', point: '少府', type: '荥', extra: '' },
+                '丑': { meridian: '脾', point: '太白', type: '输', extra: '' },
+                '卯': { meridian: '肺', point: '经渠', type: '经', extra: '' },
+                '巳': { meridian: '肾', point: '阴谷', type: '合', extra: '' },
+                '未': { meridian: '心包', point: '劳宫', type: '荥', extra: '血归包络（木生火）' }
+            },
+            '丙': {
+                '申': { meridian: '小肠', point: '少泽', type: '井', extra: '' },
+                '戌': { meridian: '胃', point: '内庭', type: '荥', extra: '' },
+                '子': { meridian: '大肠', point: '三间', type: '输', extra: '返本还原腕骨' },
+                '寅': { meridian: '膀胱', point: '昆仑', type: '经', extra: '' },
+                '辰': { meridian: '胆', point: '阳陵泉', type: '合', extra: '' },
+                '午': { meridian: '三焦', point: '中渚', type: '输', extra: '气纳三焦（木生火）' }
+            },
+            '丁': {
+                '未': { meridian: '心', point: '少冲', type: '井', extra: '' },
+                '酉': { meridian: '脾', point: '大都', type: '荥', extra: '' },
+                '亥': { meridian: '肺', point: '太渊', type: '输', extra: '返本还原神门' },
+                '丑': { meridian: '肾', point: '复溜', type: '经', extra: '' },
+                '卯': { meridian: '肝', point: '曲泉', type: '合', extra: '' },
+                '巳': { meridian: '心包', point: '大陵', type: '输', extra: '血归包络（火生土）' }
+            },
+            '戊': {
+                '午': { meridian: '胃', point: '厉兑', type: '井', extra: '' },
+                '申': { meridian: '大肠', point: '二间', type: '荥', extra: '' },
+                '戌': { meridian: '膀胱', point: '束骨', type: '输', extra: '返本还原冲阳' },
+                '子': { meridian: '胆', point: '阳辅', type: '经', extra: '' },
+                '寅': { meridian: '小肠', point: '小海', type: '合', extra: '' },
+                '辰': { meridian: '三焦', point: '支沟', type: '经', extra: '气纳三焦（火生土）' }
+            },
+            '己': {
+                '巳': { meridian: '脾', point: '隐白', type: '井', extra: '' },
+                '未': { meridian: '肺', point: '鱼际', type: '荥', extra: '' },
+                '酉': { meridian: '肾', point: '太溪', type: '输', extra: '返本还原太白' },
+                '亥': { meridian: '肝', point: '中封', type: '经', extra: '' },
+                '丑': { meridian: '心', point: '少海', type: '合', extra: '' },
+                '卯': { meridian: '心包', point: '间使', type: '经', extra: '血归包络（土生金）' }
+            },
+            '庚': {
+                '辰': { meridian: '大肠', point: '商阳', type: '井', extra: '' },
+                '午': { meridian: '膀胱', point: '通谷', type: '荥', extra: '' },
+                '申': { meridian: '胆', point: '足临泣', type: '输', extra: '返本还原合谷' },
+                '戌': { meridian: '小肠', point: '阳谷', type: '经', extra: '' },
+                '子': { meridian: '胃', point: '足三里', type: '合', extra: '' },
+                '寅': { meridian: '三焦', point: '天井', type: '合', extra: '气纳三焦（土生金）' }
+            },
+            '辛': {
+                '卯': { meridian: '肺', point: '少商', type: '井', extra: '' },
+                '巳': { meridian: '肾', point: '然谷', type: '荥', extra: '' },
+                '未': { meridian: '肝', point: '太冲', type: '输', extra: '返本还原太渊' },
+                '酉': { meridian: '心', point: '灵道', type: '经', extra: '' },
+                '亥': { meridian: '脾', point: '阴陵泉', type: '合', extra: '' },
+                '丑': { meridian: '心包', point: '曲泽', type: '合', extra: '血归包络（金生水）' }
+            },
+            '壬': {
+                '寅': { meridian: '膀胱', point: '至阴', type: '井', extra: '' },
+                '辰': { meridian: '胆', point: '侠溪', type: '荥', extra: '' },
+                '午': { meridian: '小肠', point: '后溪', type: '输', extra: '返本还原京骨、阳池' },
+                '申': { meridian: '胃', point: '解溪', type: '经', extra: '' },
+                '戌': { meridian: '大肠', point: '曲池', type: '合', extra: '' },
+                '子': { meridian: '三焦', point: '关冲', type: '井', extra: '气纳三焦（金生水）' }
+            },
+            '癸': {
+                '子': { meridian: '三焦', point: '关冲', type: '井', extra: '三焦经值日' },
+                '丑': { meridian: '心包', point: '中冲', type: '井', extra: '心包经值日' },
+                '卯': { meridian: '心包', point: '劳宫', type: '荥', extra: '' },
+                '巳': { meridian: '心包', point: '大陵', type: '输', extra: '返本还原太溪' },
+                '未': { meridian: '心包', point: '间使', type: '经', extra: '' },
+                '酉': { meridian: '心包', point: '曲泽', type: '合', extra: '' },
+                '亥': { meridian: '肾', point: '涌泉', type: '井', extra: '肾经值日' }
+            }
+        };
+
+        // ==================== 状态管理 ====================
+        let currentHour = new Date().getHours();
+        let selectedMeridian = null;
+        let gameSequence = [];
+        let gameCurrentIndex = 0;
+        let gameScore = 0;
+        let isManualMode = false;
+        let manualHour = null;
+        let timeInterval = null;
+        let selectedDate = new Date();
+        let gender = 'male';
+
+        // ==================== 核心计算函数 ====================
+        function getEffectiveDate(baseDate, hour) {
+            const d = new Date(baseDate);
+            if (hour >= 23 || hour < 1) d.setDate(d.getDate() + 1);
+            return d;
+        }
+
+        function getGanZhi(date) {
+            const base = new Date(1900, 0, 1);
+            const diffDays = Math.floor((date - base) / (1000 * 60 * 60 * 24));
+            const gan = ['甲','乙','丙','丁','戊','己','庚','辛','壬','癸'];
+            const zhi = ['子','丑','寅','卯','辰','巳','午','未','申','酉','戌','亥'];
+            return { gan: gan[diffDays % 10], zhi: zhi[diffDays % 12], full: gan[diffDays % 10] + zhi[diffDays % 12] };
+        }
+
+        function getHourGanZhi(dayGan, hour) {
+            let rawIndex = Math.floor((hour + 1) % 24 / 2);
+            const zhi = ['子','丑','寅','卯','辰','巳','午','未','申','酉','戌','亥'][rawIndex];
+            const startGanMap = { '甲':0,'己':0,'乙':2,'庚':2,'丙':4,'辛':4,'丁':6,'壬':6,'戊':8,'癸':8 };
+            const ganList = ['甲','乙','丙','丁','戊','己','庚','辛','壬','癸'];
+            const ganIndex = (startGanMap[dayGan] + rawIndex) % 10;
+            return { gan: ganList[ganIndex], zhi: zhi, full: ganList[ganIndex] + zhi };
+        }
+
+        function calculateLingGuiBaFa(date, hour) {
+            const effDate = getEffectiveDate(date, hour);
+            const dayGZ = getGanZhi(effDate);
+            const hourGZ = getHourGanZhi(dayGZ.gan, hour);
+            const dayGanNum = dayGanZhiNum[dayGZ.gan] || 7;
+            const dayZhiNum = dayGanZhiNum[dayGZ.zhi] || 7;
+            const hourGanNum = hourGanZhiNum[hourGZ.gan] || 5;
+            const hourZhiNum = hourGanZhiNum[hourGZ.zhi] || 4;
+            const sum = dayGanNum + dayZhiNum + hourGanNum + hourZhiNum;
+            const isYangDay = ganYinYang[dayGZ.gan] === '阳';
+            const divisor = isYangDay ? 9 : 6;
+            let remainder = sum % divisor;
+            if (remainder === 0) remainder = divisor;
+            let finalNum = remainder;
+            let genderNote = '';
+            if (remainder === 5) {
+                finalNum = (gender === 'male') ? 2 : 8;
+                genderNote = (gender === 'male') ? '男寄坤宫' : '女寄艮宫';
+            }
+            const point = baFaPoints.find(p => p.num === finalNum) || baFaPoints[0];
+            return { dayGZ: dayGZ.full, hourGZ: hourGZ.full, dayGanNum, dayZhiNum, hourGanNum, hourZhiNum,
+                     sum, isYangDay, divisor, remainder, finalNum, point, genderNote };
+        }
+
+        function calculateNajia(date, hour) {
+            const effDate = getEffectiveDate(date, hour);
+            const dayGZ = getGanZhi(effDate);
+            const hourGZ = getHourGanZhi(dayGZ.gan, hour);
+            const dayTable = najiaTable[dayGZ.gan];
+            if (!dayTable) return { noPoint: true, msg: '日干数据缺失' };
+            const entry = dayTable[hourGZ.zhi];
+            if (!entry) return { noPoint: true, msg: '时辰无对应开穴' };
+            return { meridian: entry.meridian, point: entry.point, type: entry.type, extra: entry.extra,
+                     dayGan: dayGZ.gan, hourGan: hourGZ.gan, hourZhi: hourGZ.zhi };
+        }
+
+        function calculateNazi(meridianId) {
+            const m = meridians.find(x => x.id === meridianId);
+            if (!m) return null;
+            return { mother: m.mother, son: m.son, ben: m.ben, element: m.element, yinYang: m.yinYang };
+        }
+
+        // ==================== 时钟和界面更新 ====================
+        function renderClockMarkers() {
+            const markers = document.getElementById('hourMarkers');
+            if (!markers) return;
+            let html = '';
+            const names = ['子','丑','寅','卯','辰','巳','午','未','申','酉','戌','亥'];
+            for (let i = 0; i < 12; i++) {
+                const angle = i * 30;
+                const radian = (angle - 90) * Math.PI / 180;
+                const x1 = 50 + 38 * Math.cos(radian), y1 = 50 + 38 * Math.sin(radian);
+                const x2 = 50 + 42 * Math.cos(radian), y2 = 50 + 42 * Math.sin(radian);
+                const tx = 50 + 32 * Math.cos(radian), ty = 50 + 32 * Math.sin(radian);
+                html += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#999" stroke-width="1"/>`;
+                html += `<text x="${tx}" y="${ty}" text-anchor="middle" dominant-baseline="middle" font-size="4" fill="#666">${names[i]}</text>`;
+            }
+            markers.innerHTML = html;
+        }
+
+        function updateClockHand() {
+            const hour = isManualMode && manualHour !== null ? manualHour : currentHour;
+            const index = Math.floor((hour + 1) % 24 / 2); // 0~11 子=0
+            const angle = index * 30;
+            const hourHand = document.getElementById('hourHand');
+            if (hourHand) hourHand.setAttribute('transform', `rotate(${angle}, 50, 50)`);
+        }
+
+        function getCurrentMeridian() {
+            const hour = isManualMode && manualHour !== null ? manualHour : currentHour;
+            // 气血流注索引： (floor((hour+1)/2) + 10) % 12
+            const index = (Math.floor((hour + 1) / 2) + 10) % 12;
+            return meridians[index];
+        }
+
+        function updateCurrentStatus() {
+            const current = getCurrentMeridian();
+            document.getElementById('currentShichen').textContent = current.shichen;
+            document.getElementById('currentTimeRange').textContent = current.time;
+            updateClockHand();
+            const display = document.getElementById('currentMeridianDisplay');
+            display.innerHTML = `
+                <div class="flex items-center justify-between mb-3">
+                    <h4 class="font-bold text-lg serif text-stone-800">${current.name}</h4>
+                    <span class="px-3 py-1 ${isManualMode ? 'bg-amber-100 text-amber-700' : 'bg-red-100 text-red-700'} rounded-full text-xs font-semibold">${isManualMode ? '选定' : '当令'}</span>
+                </div>
+                <p class="text-sm text-stone-600 mb-3">${current.description}</p>
+                <div class="flex gap-4 text-xs text-stone-500">
+                    <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-stone-400"></span>五行: ${current.element}</span>
+                    <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-stone-400"></span>阴阳: ${current.yinYang}</span>
+                </div>
+            `;
+            updateYiJi(current);
+            highlightCurrentMeridian(current.id);
+        }
+
+        function updateYiJi(meridian) {
+            const yiData = {
+                lung: ['深呼吸','晨练','喝温水'],
+                largeIntestine: ['排便','喝淡盐水','腹部按摩'],
+                stomach: ['吃早餐','细嚼慢咽','温热食物'],
+                spleen: ['工作学习','思虑','黄色食物'],
+                heart: ['小憩','静心','红色食物'],
+                smallIntestine: ['喝水','午睡','清淡饮食'],
+                bladder: ['喝水','运动','排尿'],
+                kidney: ['静养','黑色食物','泡脚'],
+                pericardium: ['放松','散步','愉悦心情'],
+                tripleBurner: ['准备入睡','温水泡脚','放松身心'],
+                gallbladder: ['深度睡眠','右侧卧','安静环境'],
+                liver: ['熟睡','养肝血','绿色蔬菜']
+            };
+            const jiData = {
+                lung: ['吸烟','冷饮','悲伤情绪'],
+                largeIntestine: ['憋尿','辛辣刺激','久坐'],
+                stomach: ['空腹','生冷食物','暴饮暴食'],
+                spleen: ['甜食过量','湿冷环境','久坐不动'],
+                heart: ['剧烈运动','情绪激动','暴晒'],
+                smallIntestine: ['油腻食物','过度用眼','紧张'],
+                bladder: ['憋尿','冷饮','久坐'],
+                kidney: ['过度劳累','咸食','恐惧情绪'],
+                pericardium: ['剧烈运动','情绪激动','工作压力'],
+                tripleBurner: ['熬夜','剧烈运动','大量饮水'],
+                gallbladder: ['熬夜','夜宵','思虑过度'],
+                liver: ['熬夜','饮酒','愤怒情绪']
+            };
+            const yi = yiData[meridian.id] || [];
+            const ji = jiData[meridian.id] || [];
+            document.getElementById('yiList').innerHTML = yi.map(item => `<li>• ${item}</li>`).join('');
+            document.getElementById('jiList').innerHTML = ji.map(item => `<li>• ${item}</li>`).join('');
+        }
+
+        function highlightCurrentMeridian(id) {
+            document.querySelectorAll('.meridian-card').forEach(c => c.classList.remove('active-meridian'));
+            const card = document.getElementById(`card-${id}`);
+            if (card) card.classList.add('active-meridian');
+        }
+
+        function renderMeridians() {
+            const grid = document.getElementById('meridianGrid');
+            grid.innerHTML = meridians.map(m => `
+                <div id="card-${m.id}" onclick="showMeridianDetail('${m.id}')" 
+                     class="meridian-card bg-white ink-border rounded-xl p-4 cursor-pointer border-2 border-transparent hover:border-stone-300">
+                    <div class="text-xs text-stone-400 mb-1">${m.shichen}</div>
+                    <div class="font-bold serif text-stone-800 mb-1">${m.name.replace(/手|足|太阴|阳明|少阴|太阳|厥阴|少阳/g, '')}</div>
+                    <div class="text-xs text-stone-500">${m.time}</div>
+                    <div class="mt-2 flex items-center gap-1">
+                        <span class="w-2 h-2 rounded-full" style="background: ${getElementColor(m.element)}"></span>
+                        <span class="text-xs text-stone-400">${m.element}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function getElementColor(element) {
+            const colors = { '金':'#c9b037', '木':'#5b8c5a', '水':'#2c5f7c', '火':'#c93756', '土':'#b8956a' };
+            return colors[element] || '#666';
+        }
+
+        function showMeridianDetail(id) {
+            const m = meridians.find(x => x.id === id);
+            selectedMeridian = m;
+            const detail = document.getElementById('meridianDetail');
+            detail.innerHTML = `
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <h3 class="text-2xl font-bold serif text-stone-800">${m.name}</h3>
+                            <span class="px-3 py-1 rounded-full text-xs font-semibold" style="background: ${getElementColor(m.element)}20; color: ${getElementColor(m.element)}">${m.element}·${m.yinYang}</span>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="bg-stone-50 rounded-lg p-4">
+                                <h4 class="font-semibold text-stone-700 mb-2 text-sm">时辰当令</h4>
+                                <p class="text-2xl font-mono text-stone-800">${m.time}</p>
+                                <p class="text-sm text-stone-500 mt-1">${m.shichen}</p>
+                            </div>
+                            <div><h4 class="font-semibold text-stone-700 mb-2 text-sm">养生要点</h4><p class="text-stone-600">${m.description}</p></div>
+                            <div><h4 class="font-semibold text-stone-700 mb-2 text-sm">主要功效</h4><p class="text-stone-600">${m.effect}</p></div>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-stone-700 mb-3 text-sm">主要穴位</h4>
+                        <div class="bg-stone-50 rounded-lg p-4 h-64 overflow-y-auto">
+                            <div class="flex flex-wrap gap-2">${m.points.split('、').map(p => `<span class="px-3 py-1 bg-white border border-stone-200 rounded text-sm text-stone-700 hover:border-red-300">${p}</span>`).join('')}</div>
+                        </div>
+                        <div class="mt-4 p-4 bg-amber-50 border border-amber-200 rounded-lg">
+                            <h4 class="font-semibold text-amber-800 mb-2 text-sm">针灸提示</h4>
+                            <p class="text-xs text-amber-700">${m.yinYang === '阳' ? '阳经多气多血，可用泻法' : '阴经多气少血，宜用补法'}</p>
+                        </div>
+                        <div class="mt-4 p-4 bg-stone-50 border border-stone-200 rounded-lg">
+                            <h4 class="font-semibold text-stone-700 mb-2 text-sm">纳子法取穴</h4>
+                            <div class="grid grid-cols-3 gap-2 text-xs">
+                                <div class="text-center p-2 bg-green-50 rounded"><div class="text-green-700">补母</div><div class="font-bold">${m.mother}</div></div>
+                                <div class="text-center p-2 bg-red-50 rounded"><div class="text-red-700">泻子</div><div class="font-bold">${m.son}</div></div>
+                                <div class="text-center p-2 bg-stone-100 rounded"><div class="text-stone-600">本穴</div><div class="font-bold">${m.ben}</div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            detail.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function renderPoints() {
+            const list = document.getElementById('pointsList');
+            const seen = new Set();
+            const unique = baFaPoints.filter(p => !seen.has(p.name) && seen.add(p.name));
+            list.innerHTML = unique.map(p => `
+                <div onclick="showPointDetail('${p.name}')" class="point-card p-3 rounded-lg border border-stone-200 hover:border-red-300 cursor-pointer border-l-4">
+                    <div class="flex justify-between"><span class="font-bold serif">${p.name}</span><span class="text-xs px-2 py-1 bg-stone-100 rounded">${p.trigram}卦</span></div>
+                    <div class="text-xs text-stone-500 mt-1">${p.meridian}</div>
+                    <div class="text-xs text-stone-400 mt-1">配 ${p.pair} 穴</div>
+                </div>
+            `).join('');
+        }
+
+        function showPointDetail(name) {
+            const p = baFaPoints.find(x => x.name === name);
+            if (!p) return;
+            document.getElementById('pointDetail').innerHTML = `
+                <div class="fade-in">
+                    <div class="flex items-center justify-between mb-6">
+                        <div><h3 class="text-3xl font-bold serif mb-1">${p.name}</h3><p class="text-stone-500">${p.meridian} · ${p.trigram}卦</p></div>
+                        <div class="w-16 h-16 bg-stone-200 rounded-full flex items-center justify-center text-2xl font-bold text-stone-600 serif">${p.name[0]}</div>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="bg-white rounded-lg p-4 border border-stone-200"><h4 class="font-semibold mb-2">定位</h4><p>${p.position}</p></div>
+                        <div class="bg-white rounded-lg p-4 border border-stone-200"><h4 class="font-semibold mb-2">主治</h4><p>${p.effect}</p></div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-amber-50 rounded-lg p-4 border border-amber-200"><h4 class="font-semibold text-amber-800 mb-2">八卦配属</h4><p>${p.trigram}卦 · 九宫数${p.num}</p></div>
+                            <div class="bg-blue-50 rounded-lg p-4 border border-blue-200"><h4 class="font-semibold text-blue-800 mb-2">八脉交会</h4><p>配 ${p.pair} 穴</p></div>
+                        </div>
+                        <div class="bg-red-50 rounded-lg p-4 border border-red-200"><h4 class="font-semibold text-red-800 mb-2">灵龟八法应用</h4><p class="text-sm">余数${p.num}时开穴</p></div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // ==================== 模式切换与时间控制 ====================
+        function toggleMode() {
+            isManualMode = !isManualMode;
+            document.getElementById('timeControls').classList.toggle('hidden', !isManualMode);
+            const badge = document.getElementById('modeBadge');
+            if (isManualMode) {
+                badge.className = 'mode-indicator mode-manual';
+                badge.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-red-500"></span>手动模式';
+                document.getElementById('sectionTitle').textContent = '所选时辰经络';
+                document.getElementById('pulseIndicator').style.opacity = '0';
+                manualHour = currentHour;
+                updateTimeSlider(manualHour);
+                updateShichenButtons(manualHour);
+            } else {
+                badge.className = 'mode-indicator mode-realtime';
+                badge.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>实时模式';
+                document.getElementById('sectionTitle').textContent = '当前时辰经络';
+                document.getElementById('pulseIndicator').style.opacity = '1';
+                manualHour = null;
+                updateTime();
+            }
+            updateAllCalculations();
+        }
+
+        function resetToCurrentTime() {
+            if (!isManualMode) return;
+            manualHour = new Date().getHours();
+            updateTimeSlider(manualHour);
+            updateShichenButtons(manualHour);
+            updateAllCalculations();
+        }
+
+        function handleTimeSlider(value) {
+            manualHour = parseInt(value);
+            updateShichenButtons(manualHour);
+            updateAllCalculations();
+        }
+
+        function selectShichen(hour) {
+            manualHour = hour;
+            updateTimeSlider(hour);
+            updateShichenButtons(hour);
+            updateAllCalculations();
+        }
+
+        function updateTimeSlider(hour) {
+            const slider = document.getElementById('timeSlider');
+            if (slider) slider.value = hour;
+        }
+
+        function updateShichenButtons(activeHour) {
+            document.querySelectorAll('.shichen-btn').forEach(btn => {
+                btn.classList.remove('active');
+                const btnHour = parseInt(btn.getAttribute('data-hour'));
+                if (Math.floor(activeHour/2) === Math.floor(btnHour/2)) btn.classList.add('active');
+            });
+        }
+
+        function updateTime() {
+            const now = new Date();
+            document.getElementById('currentTime').textContent = now.toLocaleTimeString('zh-CN', { hour12: false });
+            document.getElementById('currentDate').textContent = now.toLocaleDateString('zh-CN', { year:'numeric', month:'long', day:'numeric', weekday:'long' });
+            if (!isManualMode) {
+                const newHour = now.getHours();
+                if (newHour !== currentHour) {
+                    currentHour = newHour;
+                    updateAllCalculations();
+                }
+            }
+        }
+
+        function updateAllCalculations() {
+            updateCurrentStatus();
+            updateGanZhi();
+        }
+
+        function setToday() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('datePicker').value = today;
+            selectedDate = new Date();
+            updateGanZhi();
+        }
+
+        function setGender(g) {
+            gender = g;
+            document.getElementById('genderMale').classList.toggle('active', g === 'male');
+            document.getElementById('genderFemale').classList.toggle('active', g === 'female');
+            updateGanZhi();
+        }
+
+        function updateGanZhi() {
+            const dateInput = document.getElementById('datePicker').value;
+            selectedDate = new Date(dateInput);
+            const hour = isManualMode && manualHour !== null ? manualHour : currentHour;
+            const linggui = calculateLingGuiBaFa(selectedDate, hour);
+            displayLingGuiResult(linggui);
+            const najia = calculateNajia(selectedDate, hour);
+            displayNajiaResult(najia);
+            const currentMeridian = getCurrentMeridian();
+            const nazi = calculateNazi(currentMeridian.id);
+            displayNaziResult(nazi, currentMeridian);
+        }
+
+        function displayLingGuiResult(calc) {
+            const container = document.getElementById('lingguiCalc');
+            container.innerHTML = `
+                <div class="grid grid-cols-2 gap-2 text-xs">
+                    <div class="flex justify-between"><span class="text-stone-400">日干支</span><span class="font-mono">${calc.dayGZ}</span></div>
+                    <div class="flex justify-between"><span class="text-stone-400">时干支</span><span class="font-mono">${calc.hourGZ}</span></div>
+                    <div class="flex justify-between"><span class="text-stone-400">日数</span><span class="font-mono">${calc.dayGanNum}+${calc.dayZhiNum}</span></div>
+                    <div class="flex justify-between"><span class="text-stone-400">时数</span><span class="font-mono">${calc.hourGanNum}+${calc.hourZhiNum}</span></div>
+                </div>
+                <div class="mt-2 pt-2 border-t border-stone-700 text-xs">
+                    <div class="flex justify-between"><span class="text-stone-400">计算</span><span class="font-mono">${calc.sum}÷${calc.divisor}=${Math.floor(calc.sum/calc.divisor)}...${calc.remainder}</span></div>
+                    <div class="flex justify-between"><span class="text-stone-400">日属</span><span class="${calc.isYangDay ? 'text-amber-400' : 'text-blue-400'}">${calc.isYangDay ? '阳日除九' : '阴日除六'}</span></div>
+                    ${calc.genderNote ? `<div class="text-amber-400 text-xs mt-1 text-right">${calc.genderNote}</div>` : ''}
+                </div>
+            `;
+            document.getElementById('lingguiPoint').textContent = calc.point.name;
+            document.getElementById('lingguiPair').textContent = `配 ${calc.point.pair} 穴（${calc.point.trigram}卦${calc.finalNum}数）`;
+        }
+
+        function displayNajiaResult(najia) {
+            const container = document.getElementById('najiaResult');
+            if (najia.noPoint) {
+                container.innerHTML = `<p class="text-stone-400 text-sm">${najia.msg}</p>`;
+                return;
+            }
+            container.innerHTML = `
+                <div class="flex items-center justify-between p-3 bg-stone-50 rounded-lg border border-stone-200">
+                    <div>
+                        <div class="text-sm font-semibold text-stone-800">${najia.meridian}经</div>
+                        <div class="text-xs text-stone-500">日干：${najia.dayGan} 时支：${najia.hourZhi}</div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-lg font-bold text-stone-800 serif">${najia.point}</div>
+                        <div class="text-xs text-stone-500">${najia.type}穴</div>
+                    </div>
+                </div>
+                ${najia.extra ? `<div class="text-xs text-stone-500 mt-2">${najia.extra}</div>` : ''}
+            `;
+        }
+
+        function displayNaziResult(nazi, meridian) {
+            const container = document.getElementById('naziResult');
+            if (!nazi) return;
+            container.innerHTML = `
+                <div class="space-y-2">
+                    <div class="flex items-center justify-between p-2 bg-green-50 rounded border border-green-200">
+                        <span class="text-xs text-green-700">虚证补母</span>
+                        <span class="font-bold text-green-800">${nazi.mother}</span>
+                    </div>
+                    <div class="flex items-center justify-between p-2 bg-red-50 rounded border border-red-200">
+                        <span class="text-xs text-red-700">实证泻子</span>
+                        <span class="font-bold text-red-800">${nazi.son}</span>
+                    </div>
+                    <div class="flex items-center justify-between p-2 bg-stone-50 rounded border border-stone-200">
+                        <span class="text-xs text-stone-600">本经自病</span>
+                        <span class="font-bold text-stone-800">${nazi.ben}</span>
+                    </div>
+                </div>
+                <div class="mt-2 text-xs text-stone-500">
+                    ${meridian.name}属${nazi.element}，${nazi.yinYang === '阳' ? '阳经' : '阴经'}
+                </div>
+            `;
+        }
+
+        // ==================== 标签页切换 ====================
+        function switchTab(tabName) {
+            ['meridians','points','knowledge','game'].forEach(t => {
+                document.getElementById(`section-${t}`).classList.add('hidden');
+                document.getElementById(`tab-${t}`).classList.remove('tab-active');
+                document.getElementById(`tab-${t}`).classList.add('text-stone-500');
+            });
+            document.getElementById(`section-${tabName}`).classList.remove('hidden');
+            document.getElementById(`tab-${tabName}`).classList.add('tab-active');
+            document.getElementById(`tab-${tabName}`).classList.remove('text-stone-500');
+            if (tabName === 'game') resetGame();
+        }
+
+        // ==================== 游戏相关 ====================
+        function initGame() {
+            const svg = document.getElementById('gameDots');
+            const connections = document.getElementById('connections');
+            const radius = 150, center = 200;
+            let dotsHtml = '', connHtml = '';
+            for (let i = 0; i < 12; i++) {
+                const a1 = (i * 30 - 90) * Math.PI / 180, a2 = ((i+1)%12 * 30 - 90) * Math.PI / 180;
+                connHtml += `<line x1="${center + radius * Math.cos(a1)}" y1="${center + radius * Math.sin(a1)}" x2="${center + radius * Math.cos(a2)}" y2="${center + radius * Math.sin(a2)}" stroke-dasharray="5,5" opacity="0.3"/>`;
+            }
+            connections.innerHTML = connHtml;
+            meridians.forEach((m,i) => {
+                const a = (i * 30 - 90) * Math.PI / 180;
+                dotsHtml += `<g class="game-dot" id="dot-${i}" onclick="handleDotClick(${i})" transform="translate(${center + radius * Math.cos(a)}, ${center + radius * Math.sin(a)})">
+                    <circle r="6" fill="#d1d5db" stroke="white" stroke-width="2"/><text y="15" text-anchor="middle" font-size="10" fill="#666">${m.shichen}</text></g>`;
+            });
+            svg.innerHTML = dotsHtml;
+            document.getElementById('sequenceDisplay').innerHTML = meridians.map((_,i) => `<div id="seq-${i}" class="w-8 h-8 rounded-full bg-stone-200 flex items-center justify-center text-xs text-stone-500">${i+1}</div>`).join('');
+        }
+
+        function startGame() {
+            document.getElementById('gameOverlay').classList.add('hidden');
+            gameSequence = [...Array(12).keys()].sort(() => Math.random() - 0.5);
+            gameCurrentIndex = 0; gameScore = 0;
+            document.getElementById('gameScore').textContent = '0';
+            document.getElementById('activeConnections').innerHTML = '';
+            document.querySelectorAll('.game-dot circle').forEach(c => { c.setAttribute('fill','#d1d5db'); c.classList.remove('completed'); });
+            for (let i=0; i<12; i++) document.getElementById(`seq-${i}`).className = 'w-8 h-8 rounded-full bg-stone-200 flex items-center justify-center text-xs text-stone-500';
+            highlightTarget();
+        }
+
+        function resetGame() {
+            document.getElementById('gameOverlay').classList.remove('hidden');
+            document.getElementById('activeConnections').innerHTML = '';
+            document.querySelectorAll('.game-dot circle').forEach(c => c.setAttribute('fill','#d1d5db'));
+            gameScore = 0;
+            document.getElementById('gameScore').textContent = '0';
+            document.getElementById('gameMessage').textContent = '';
+        }
+
+        function highlightTarget() {
+            if (gameCurrentIndex < 12) {
+                const idx = gameSequence[gameCurrentIndex];
+                document.querySelector(`#dot-${idx} circle`).setAttribute('fill','#c93756');
+            }
+        }
+
+        function handleDotClick(index) {
+            if (gameCurrentIndex >= 12) return;
+            const target = gameSequence[gameCurrentIndex];
+            if (index === target) {
+                const dot = document.querySelector(`#dot-${index} circle`);
+                dot.setAttribute('fill','#5b8c5a');
+                dot.classList.add('completed');
+                if (gameCurrentIndex > 0) drawConnection(gameSequence[gameCurrentIndex-1], index);
+                document.getElementById(`seq-${gameCurrentIndex}`).className = 'w-8 h-8 rounded-full bg-green-500 flex items-center justify-center text-xs text-white';
+                gameCurrentIndex++; gameScore += 10;
+                document.getElementById('gameScore').textContent = gameScore;
+                if (gameCurrentIndex >= 12) {
+                    document.getElementById('gameMessage').innerHTML = '<span class="text-green-600 font-semibold">恭喜完成！</span>';
+                    setTimeout(() => {
+                        document.getElementById('gameOverlay').innerHTML = `<div class="text-center"><div class="text-2xl font-bold mb-2">挑战完成！</div><div class="mb-4">得分: ${gameScore}</div><button onclick="startGame()" class="px-6 py-3 bg-stone-800 text-white rounded-xl">再玩一次</button></div>`;
+                        document.getElementById('gameOverlay').classList.remove('hidden');
+                    }, 1000);
+                } else {
+                    highlightTarget();
+                    document.getElementById('gameMessage').textContent = `下一个: ${meridians[gameSequence[gameCurrentIndex]].shichen}`;
+                }
+            } else {
+                const dot = document.querySelector(`#dot-${index} circle`);
+                dot.setAttribute('fill','#dc2626');
+                setTimeout(() => { if (!dot.classList.contains('completed')) dot.setAttribute('fill','#d1d5db'); }, 300);
+                gameScore = Math.max(0, gameScore - 5);
+                document.getElementById('gameScore').textContent = gameScore;
+                document.getElementById('gameMessage').textContent = '顺序错误';
+            }
+        }
+
+        function drawConnection(from, to) {
+            const svg = document.getElementById('activeConnections');
+            const radius = 150, center = 200;
+            const a1 = (from * 30 - 90) * Math.PI / 180, a2 = (to * 30 - 90) * Math.PI / 180;
+            const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+            line.setAttribute('x1', center + radius * Math.cos(a1));
+            line.setAttribute('y1', center + radius * Math.sin(a1));
+            line.setAttribute('x2', center + radius * Math.cos(a2));
+            line.setAttribute('y2', center + radius * Math.sin(a2));
+            line.setAttribute('stroke', '#c93756'); line.setAttribute('stroke-width', '3');
+            svg.appendChild(line);
+        }
+
+        // ==================== 初始化 ====================
+        function init() {
+            document.getElementById('datePicker').value = new Date().toISOString().split('T')[0];
+            updateTime();
+            timeInterval = setInterval(updateTime, 1000);
+            renderMeridians();
+            renderPoints();
+            renderClockMarkers();
+            updateAllCalculations();
+            initGame();
+        }
+        init();
+    </script>
+</body>
+</html>
